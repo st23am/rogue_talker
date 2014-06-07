@@ -16,7 +16,7 @@ defmodule Rogue do
   end
 
   def handle_call(:get_intel, _from, []) do
-    intel = "\n \n \n  #{IO.ANSI.escape_fragment("%{clear, home}")}#{List.last(Agent.get(RogueAgent, fn(state) -> state end))} \n \n \n"
+    intel = "#{List.last(Agent.get(RogueAgent, fn(state) -> state end))}"
     {:reply, intel, []}
   end
 
@@ -46,7 +46,8 @@ defmodule Rogue do
 
   def show({pid, port}) do
     redraw({pid, port})
-    GenServer.call(pid, :get_intel) |> IO.puts
+    msg = GenServer.call(pid, :get_intel)
+    IO.puts(IO.ANSI.clear() <> IO.ANSI.reset() <> IO.ANSI.green() <> msg <> IO.ANSI.reset() <> IO.ANSI.home())
   end
 
   defp redraw({pid, port}) do
