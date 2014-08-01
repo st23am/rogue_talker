@@ -51,6 +51,7 @@ defmodule Rogue do
   end
 
   defp redraw({pid, port}) do
+    #Hack to get Rogue to redraw
     GenServer.call(pid, {:command_rogue, port, "?"}) #"
     GenServer.call(pid, {:command_rogue, port, "*"})
     GenServer.call(pid, {:command_rogue, port, " "})

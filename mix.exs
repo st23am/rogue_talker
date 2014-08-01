@@ -4,7 +4,7 @@ defmodule RogueTalker.Mixfile do
   def project do
     [app: :rogue_talker,
      version: "0.0.1",
-     elixir: "~> 0.13.3",
+     elixir: "~> 0.14.3",
      deps: deps]
   end
 
